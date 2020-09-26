@@ -8,3 +8,9 @@ ROVERS = [
     'opportunity',
 ]
 
+
+
+### GUI CONSTANTS ###
+
+GUI_TITLE = ('Verdana', 14)
+
