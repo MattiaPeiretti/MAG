@@ -6,7 +6,7 @@ class ImageRetriever:
     def __init__(self, project_path):
         self.project_path = project_path
         self.query = {}
-        self.images = []
+        self.Images = []
 
     def set_query(self, rover, date, camera='', earth_date=False):
         
@@ -32,11 +32,25 @@ class ImageRetriever:
         
         res = requests.get(api_hyperlink)
         parsed = json.loads(res.text)
-        print(json.dumps(parsed, indent=4))
+        # print(json.dumps(parsed, indent=4))
+
+        for photo in parsed['photos']:
+            image = {
+                'id': photo['id'],
+                'sol': photo['sol'],
+                'src': photo['img_src'],
+                'earth_date': photo['earth_date'],
+                'rover': photo['rover']['name'],
+                'camera': photo['camera']['name'],
+            }
+
+            self.Images.append(image)
+
+        # print(self.images)
 
 
     def images(self):
-        pass
+        return self.Images
 
 
 def build_api_hyperlink(rover, date, camera, earth_date=False):
